@@ -1,0 +1,6 @@
+[submodule "transaction_layer/openassets"]
+	path = transaction_layer/openassets
+	url = git@github.com:benjyz/openassets.git
+[submodule "transaction_layer/python-bitcoinlib"]
+	path = transaction_layer/python-bitcoinlib
+	url = git@github.com:benjyz/python-bitcoinlib.git
