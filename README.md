@@ -3,13 +3,25 @@
 This is an early proof of concept for the Lykke exchange marketplace, see ([Lykke Colored Coin Exchange White Paper](https://wiki.lykkex.com/colored_coin_exchange_white_paper)), based
 based on Colored Coins [https://github.com/OpenAssets/](Openassets).
 
+## Building
+
+Install
+
+* [https://github.com/bitcoin/bitcoin](bitcoin core)  
+* [https://github.com/benjyz/python-bitcoinlib](python-bitcoin)
+* [https://github.com/OpenAssets/openassets](openassets)
+
+Try the examples in transaction_layer/examples
+
 ## Simplified market model
 
-we use a very simple model of a market
+We develop a very simplified auction protocol so to focus on a Bitcoin <> Colored Coin swap
 
-* the market consists of two assets: Bitcoin and LykkeCoin, and therefore on trading pair: LKK/BTC
+* we introduce a ColoredCoin for testing purposes: ProtomarketCoin (PMC)
 
-* clients submit requests to the server to buy or sell LKK against BTC
+* the market consists of two assets: Bitcoin and ProtomarketCoin, and therefore one trading pair: PMC/BTC
+
+* clients submit requests to the server to buy or sell PMC against BTC
 
 * the quantity of the request is fixed to 10 units
 
