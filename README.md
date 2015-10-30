@@ -1,9 +1,7 @@
 ## Protomarket
 
-a prototype for a marketplace
-
-This is an early proof of concept for a global market place
-based on Colored Coins, [https://github.com/OpenAssets/](Openassets) and the Lykke exchange concept, see ([Lykke Colored Coin Exchange White Paper](https://wiki.lykkex.com/colored_coin_exchange_white_paper)).
+This is an early proof of concept for the Lykke exchange marketplace, see ([Lykke Colored Coin Exchange White Paper](https://wiki.lykkex.com/colored_coin_exchange_white_paper)), based
+based on Colored Coins [https://github.com/OpenAssets/](Openassets).
 
 ## Simplified market model
 
@@ -33,4 +31,4 @@ we use a very simple model of a market
 
 ## License
 
-MIT License
+MIT License, see https://opensource.org/licenses/MIT
