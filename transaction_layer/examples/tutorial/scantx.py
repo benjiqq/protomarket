@@ -11,7 +11,6 @@ from bitcoin.core import b2x, lx, COIN, COutPoint, CMutableTxOut, CMutableTxIn, 
 import datetime
 OP_RETURN = 106
 
-
 def datestr(utime):
     dateFormat = '%Y-%m-%d'
     return datetime.datetime.fromtimestamp(int(utime)).strftime(dateFormat)
@@ -87,8 +86,8 @@ def printblock(blocknum,f=None):
 
             #printallTx(tx)
 
-def printblockOPR(blocknum,f=None):
-    proxy = bitcoin.rpc.Proxy()
+def printblockOPR(proxy, blocknum,f=None):
+
 
     h = proxy.getblockhash(blocknum)
     block = proxy.getblock(h)
@@ -118,13 +117,13 @@ def scanblock(proxy, blocknum,f=None):
     block = proxy.getblock(h)
 
     num_opr = 0
-    print '#tx : ',len(block.vtx)
+    #print '#tx : ',len(block.vtx)
     for tx in block.vtx[:]:
         txid = b2lx(tx.GetHash())
-        print txid
+        #print txid
         if hasOPR(tx):
 
-            printTxOPR(tx)
+            #printTxOPR(tx)
             num_opr +=1
 
     if num_opr > 0:
@@ -132,22 +131,24 @@ def scanblock(proxy, blocknum,f=None):
         print s
         if f: f.write(s + '\n')
     else:
-        print blocknum
+        #print blocknum
+        pass
     #print 'total opr',num_opr
 
 def scanall():
     """ scan blockain for op_return """
-    start = 376682 #265459
+    start = 250000 #376682 #265459
+    end = 381240
     proxy = bitcoin.rpc.Proxy()
-    for bl in range(start,start+100):
+    f = open('opr_count.csv','w')
+    for bl in range(start,end):
         try:
-            scanblock(proxy, bl)
+            scanblock(proxy, bl,f)
         except:
             print 'failure scanning block'
-    #f.close()
+    f.close()
 
 if __name__=='__main__':
     block = 376682 #380550
     #printblockOPR(block)
-    #scanblock(block)
-    #scanall()
+    scanall()

@@ -20,7 +20,7 @@ def printblock(blocknum):
     h = proxy.getblockhash(blocknum)
     block = proxy.getblock(h)
     print 'number of transactions : ',len(block.vtx)
-    for tx in block.vtx[:1#]:
+    for tx in block.vtx[:5]:
         txid = b2lx(tx.GetHash())
         print '*'*30
         print txid
