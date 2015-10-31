@@ -1,4 +1,4 @@
-# Bitcoin tutorial
+# Bitcoin smart contract tutorial
 
 Bitcoin is a 100,000 lines C++ program which in large parts is hard to understand
 
