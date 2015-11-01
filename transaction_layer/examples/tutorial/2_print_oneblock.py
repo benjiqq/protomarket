@@ -36,7 +36,11 @@ def printInfo(blockheight):
 
     print (block.nTime)
     print (block.get_header())
+    print (b2lx(block.hashMerkleRoot))
     print (b2lx(block.hashPrevBlock))
+    print (len(block.vMerkleTree))
+    print (len(block.vtx))
+
 
 if __name__=='__main__':
     blockheight = 381410

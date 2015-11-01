@@ -1,12 +1,14 @@
 # Bitcoin smart contract tutorial
 
-Bitcoin is a 100,000 lines C++ program which in large parts is hard to understand
+Bitcoin is a 100,000 lines C++ program which can be hard to understand
 
-With python-bitcoin we have a much more leightweight possiblity of creating advanced transactions in Bitcoin.
+With python-bitcoin there is a tool for much more leightweight interaction.
 
-This is a tutorial for using this intermediate layer.
+This is a tutorial for using this intermediate layer to interact with the Bitcoin blockchain.
 
-To learn more about transactions see also:
+To run the example codes install bitcoind and python-bitcoin
+
+To learn more about the Bitcoin-blockchain, transactions, script see:
 
 * https://github.com/aantonop/bitcoinbook
 * https://en.bitcoin.it/wiki/Main_Page
