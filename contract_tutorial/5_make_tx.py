@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-"""Low-level example of how to spend a standard pay-to-pubkey-hash (P2PKH) txout"""
+"""
+from github.com/petertodd/python-bitcoinlib
+Low-level example of how to spend a standard pay-to-pubkey-hash (P2PKH) txout
+from a brainwallet
+"""
 
 import sys
 if sys.version_info.major < 3:
@@ -19,7 +23,7 @@ from cuneiform.pybitcoin import *
 from cuneiform.pybitcoin.bci import bci_unspent
 SelectParams('mainnet')
 
-# Create a brainwallet secret key.
+# Create a brainwallet from secret key.
 
 secret_file = "secret.key"
 
@@ -38,7 +42,7 @@ def get_addr(secret):
     pub = privtopub(priv)
     addr = pubtoaddr(pub)
 
-    #addrstr =  #'1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T'
+    #addrstr =  #'1JwSSubkmg6iPtRjtyqhUYYH7bZg3Lfy2T'
     return addr
 
 
@@ -54,12 +58,10 @@ def maketx(secret):
     print (bci_unspent)
     return
 
+
     # Same as the txid:vout the createrawtransaction RPC call requires
-    #
-    # lx() takes *little-endian* hex and converts it to bytes; in Bitcoin
-    # transaction hashes are shown little-endian rather than the usual big-endian.
-    # There's also a corresponding x() convenience function that takes big-endian
-    # hex and converts it to bytes.
+    # TODO: get from blockr.io
+    
     txid = lx('7e195aa3de827814f172c362fcf838d92ba10e3f9fdd9c3ecaf79522b311b22d')
     vout = 0
 
@@ -69,17 +71,12 @@ def maketx(secret):
 
     print (txin)
 
-    # We also need the scriptPubKey of the output we're spending because
-    # SignatureHash() replaces the transaction scriptSig's with it.
-    #
-    # Here we'll create that scriptPubKey from scratch using the pubkey that
-    # corresponds to the secret key we generated above.
     txin_scriptPubKey = CScript([OP_DUP, OP_HASH160, Hash160(seckey.pub), OP_EQUALVERIFY, OP_CHECKSIG])
 
-    # Create the txout. This time we create the scriptPubKey from a Bitcoin
-    # address.
+    # Create the txout
     amount = 0.0001
-    txout = CMutableTxOut(amount*COIN, CBitcoinAddress('1C7zdTfnkzmr13HfA2vNm5SJYRK6nEKyq8').to_scriptPubKey())
+    addrstr = '1C7zdTfnkzmr13HfA2vNm5SJYRK6nEKyq8'
+    txout = CMutableTxOut(amount*COIN, CBitcoinAddress(addrstr).to_scriptPubKey())
 
     # Create the unsigned transaction.
     tx = CMutableTransaction([txin], [txout])
@@ -94,13 +91,17 @@ def maketx(secret):
     # Set the scriptSig of our transaction input appropriately.
     txin.scriptSig = CScript([sig, seckey.pub])
 
+    # TODO: eval output flag
+    
     # Verify the signature worked. This calls EvalScript() and actually executes
-    # the opcodes in the scripts to see if everything worked out. If it doesn't an
-    # exception will be raised.
+    # the opcodes in the scripts to see if everything worked out.
     #VerifyScript(txin.scriptSig, txin_scriptPubKey, tx, 0, (SCRIPT_VERIFY_P2SH,))
 
+    # TODO: send tx (?)
+    
     # Done! Print the transaction to standard output with the bytes-to-hex
     # function.
+    
     print(b2x(tx.serialize()))
 
 if __name__=='__main__':
