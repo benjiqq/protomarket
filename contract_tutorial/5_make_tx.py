@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-from github.com/petertodd/python-bitcoinlib
+adapted from github.com/petertodd/python-bitcoinlib
 Low-level example of how to spend a standard pay-to-pubkey-hash (P2PKH) txout
 from a brainwallet
 """
@@ -19,6 +19,7 @@ from cuneiform.bitcoin.core.script import CScript, OP_DUP, OP_HASH160, OP_EQUALV
 from cuneiform.bitcoin.core.scripteval import VerifyScript, SCRIPT_VERIFY_P2SH
 from cuneiform.bitcoin.wallet import CBitcoinAddress, CBitcoinSecret
 
+# pybitcoin tools
 from cuneiform.pybitcoin import *
 from cuneiform.pybitcoin.bci import bci_unspent
 SelectParams('mainnet')
@@ -36,15 +37,11 @@ def get_secret():
         return None
 
 def get_addr(secret):
-
     #generate pubkey from passphrase
     priv = sha256(secret)
     pub = privtopub(priv)
     addr = pubtoaddr(pub)
-
-    #addrstr =  #'1JwSSubkmg6iPtRjtyqhUYYH7bZg3Lfy2T'
     return addr
-
 
 def maketx(secret):
     addr = get_addr(secret)
@@ -54,13 +51,14 @@ def maketx(secret):
     h = hashlib.sha256(secret.encode('UTF-8')).digest()
     seckey = CBitcoinSecret.from_secret_bytes(h)
     print (seckey)
+    # TODO: get from blockr.io instead
     unspent = bci_unspent(addr)
     print (bci_unspent)
-    return
+
+    #TODO: use unspent outputs
 
 
     # Same as the txid:vout the createrawtransaction RPC call requires
-    # TODO: get from blockr.io
     
     txid = lx('7e195aa3de827814f172c362fcf838d92ba10e3f9fdd9c3ecaf79522b311b22d')
     vout = 0
@@ -93,13 +91,13 @@ def maketx(secret):
 
     # TODO: eval output flag
     
-    # Verify the signature worked. This calls EvalScript() and actually executes
-    # the opcodes in the scripts to see if everything worked out.
+    # Verify the signature worked. This calls EvalScript()
+    
     #VerifyScript(txin.scriptSig, txin_scriptPubKey, tx, 0, (SCRIPT_VERIFY_P2SH,))
 
     # TODO: send tx (?)
     
-    # Done! Print the transaction to standard output with the bytes-to-hex
+    # Print the transaction to standard output with the bytes-to-hex
     # function.
     
     print(b2x(tx.serialize()))
