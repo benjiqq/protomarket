@@ -1,13 +1,14 @@
 # Governance of a global market place
 
-Bitcoin is mostly a currency, but also potentially contract and asset transfer system. When
+# Governance versus Regulation
+
+Bitcoin is mostly a currency, but also potentially a contract and asset transfer system. When
 the technology- and financial industry gets excited about "blockchain", what they really mean
-is the ability to transfer assets. However, there is no alignment among jurisdictions what assets,
+is mostly the ability to transfer assets. However, there is no alignment among jurisdictions what assets,
 property and contracts are. In particular transfer of property through exchanges ("marketplaces")
 is also heterogenous. Regulation, self-regulation and governance should be carefully distinguished.
 Regulation often implies a top-down process of nation states and large corporations dictating the state of
-affairs (how likely is a citizen to affect global banking regulation?). Self-regulation and governance
-are a bottom up process of engagement.
+affairs (how likely is a citizen to affect global banking regulations or monetary policy?). Self-regulation and governance are a bottom up process of engagement.
 
 ## Regulation of cryptocurrencies
 
@@ -27,9 +28,15 @@ For a history of electronic markets and Alternative Trading venues in the US I'd
 
 The European Union has regulated exchanges and alternative trading venues under MiFID Markets in Financial Instruments Directive, see [4], [5].
 
-[0] https://empoweredlaw.wordpress.com
-[1] https://github.com/ethereum/ethereum-org...isSale.pdf
-[2] http://en.dfca.ch
-[3] http://www.world-exchanges.org
-[4] https://en.wikipedia.org/wiki/Markets_in_Financial_Instruments_Directive
-[5] http://mifiddatabase.esma.europa.eu
+sources
+
+* [1] https://github.com/ethereum/ethereum-org...isSale.pdf
+* [2] http://en.dfca.ch
+* [3] http://www.world-exchanges.org
+* [4] https://en.wikipedia.org/wiki/Markets_in_Financial_Instruments_Directive
+* [5] http://mifiddatabase.esma.europa.eu
+
+other sources
+
+* https://empoweredlaw.wordpress.com
+* SWARM Working Paper, Distributed Networks and the Law
