@@ -1,6 +1,6 @@
 # Governance of a global market place
 
-# Governance versus Regulation
+## Governance versus Regulation
 
 Bitcoin is mostly a currency, but also potentially a contract and asset transfer system. When
 the technology- and financial industry gets excited about "blockchain", what they really mean
