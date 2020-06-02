@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://forum.lykkex.com/archive/index.php?thread-20-1.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Lykke - Protomarket</title>
+
+<meta name="robots" content="index,follow">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket_files/screen.css" media="screen">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket_files/print.css" media="print">
+</head>
+<body>
+<div id="container">
+<h1><a href="https://forum.lykkex.com/index.php">Lykke</a></h1>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+<div id="fullversion"><strong>Full Version:</strong> <a href="https://forum.lykkex.com/thread-20.html">Protomarket</a></div>
+<div id="infobox">You're currently viewing a stripped down version of our content. <a href="https://forum.lykkex.com/thread-20.html">View the full version</a> with proper formatting.</div>
+<div id="content">
+<div class="multipage"><strong>Pages:</strong> <strong>1</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-2.html">2</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-3.html">3</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-4.html">4</a> </div><div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">10-28-2015, 09:41 PM</div>
+</div>
+<div class="message">Here is my prototype code&nbsp;<a href="https://github.com/benjyz/protomarket" target="_blank">https://github.com/benjyz/protomarket</a><br>
+<br>
+As suggested in my proposal I'm focusing on some underlying components building on openassets and python-bitcoin. I'll explain some technical details of openassets here. Colored Coins overall are quite complex, because in the end its tagging bytes which are originally not mean to track separate assets. A system like Nxt tracks asset-issuance separately which means the complexity is orders of magnitude lower (the security feature are debatable, but being able to define different transaction rules sets is certainly an advantage). Working with Bitcoin and its script can be a challenge. python-bitcoin makes these things easier, which is also what OpenAsset uses under the hood. <br>
+<br>
+I've added some&nbsp;code to scan the Bitcoin blockchain for Colored Coin transactions und&nbsp;btcpy/scantx.py &nbsp;. btcpy requires bitcoind and python-bitcoin. I'll merge these things together with OpenAssets later.<br>
+<br>
+With the scantx&nbsp;code one can find a Lykke coin transaction and the code OpenAssets uses for the transaction. One can traverse all transactions and all inputs and outputs of a transaction. As an output of the Color Coin transaction one can see:<br>
+<br>
+<br>
+"scriptPubKey": {<br>
+&nbsp; &nbsp; &nbsp; &nbsp; "asm": "OP_RETURN 4f4101000280d6a3f81be09082f7a4eb0200",<br>
+&nbsp; &nbsp; &nbsp;....<br>
+}<br>
+<br>
+This is the OP_RETURN code mentioned. It has 18 bytes. &nbsp;The first bytes are easy to understand:<br>
+<br>
+&nbsp; &nbsp; 0x4f 0x41 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;The Open Assets Protocol tag.<br>
+&nbsp; &nbsp; 0x01 0x00 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Version 1 of the protocol.<br>
+<br>
+The next sections contain processing data for the quantities, which I will dissect later.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">10-29-2015, 08:54 AM</div>
+</div>
+<div class="message">Alternative encoding schema:<br>
+<a href="https://github.com/colored-coins" target="_blank">https://github.com/colored-coins</a><br>
+<a href="https://docs.google.com/document/d/1AnkP_cVZTCMLIzw4DvsW6M8Q2JC0lIzrTLuoWu2z1BE/" target="_blank">https://docs.google.com/document/d/1AnkP...uoWu2z1BE/</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">10-30-2015, 02:39 PM</div>
+</div>
+<div class="message">Hi Ben,<br>
+Do you have any shared enviroment for one who might want to test your prototype? Or this should be installed locally? <br>
+<br>
+Is it correct that your proposal is to deploy an alt-chain for Lykke which is separate from Bitcoin blockshain?<br>
+Or this could be the sidechain which provides transferring assets Bitcoin blockchain?<br>
+<a href="https://www.blockstream.com/" target="_blank">https://www.blockstream.com/</a><br>
+<a href="https://blockstream.com/developers/" target="_blank">https://blockstream.com/developers/</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">10-30-2015, 03:36 PM</div>
+</div>
+<div class="message">Hi,<br>
+<br>
+I'll add a description for building. It is currently a layer for interacting with bitcoin only and can be run locally. I want to implement a channel and/or multi-sig for swapping BTC for a colored coin (without matching first).<br>
+<br>
+The dependencies are  bitcoind (i.e. bitcoin core), python-bitcoin and openassets. python-bitcoin is Peter Todd's python library which reimplements objects like blocks, transactions, scripts in python itself and then interacts with bitcoind. So this way one can interact with bitcoin and its engine, without the need to understand too much of the internals. OpenAssets has the same approach. <br>
+<br>
+My personal opinion would be to build out this underlying layer and see what is possible, as all of it is unexplored territory.  I'm not optimistic about Sidechains and Liquid - I think it's the wrong approach. I see the market setting prices for chains as the foundation. To move value between chains requires a pricing and liquidity mechanism. Sidechains doesn't have that - it assumes value can be fixed (for reasons I can't follow). Enhancing the infrastructure around scripting and OpenAssets would be a good first step.<br>
+<hr>
+The example_oa.py shows how OpenAssets uses OP_RETURN for tracking colored coins. As is currently is the case with bitcoin this is much like coding assembler and quite ackward. But here one can see the&nbsp;<span style="font-size: small;"><span style="font-family: Monaco, Consolas, Courier, monospace;">OA marker (18, 'OA...')</span></span><br>
+<br>
+<div class="codeblock">
+<div class="title">Code:<br>
+</div><div class="body" dir="ltr"><code>tx = 'd36c4d813db379a95264fc3f5b26288b9faa0e7007a2fabb3e59bdfd7a919361'<br>
+<br>
+printtx(tx)<br>
+<br>
+"""<br>
+this is the result:<br>
+tuples of (opcode, data, sop_idx)<br>
+<br>
+(106, None, 0<br>
+(18, 'OA\x01\x00\x02\x80\xd6\xa3\xf8\x1b\xe0\x90\x82\xf7\xa4\xeb\x02\x00', 1)<br>
+...<br>
+"""</code></div></div>
+</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">10-30-2015, 04:18 PM</div>
+</div>
+<div class="message">A different ColoredCoins implementation:<br>
+<a href="https://github.com/chromaway/ngcccbase/wiki/EPOBC_simple" target="_blank">https://github.com/chromaway/ngcccbase/w...OBC_simple</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">10-31-2015, 07:58 AM</div>
+</div>
+<div class="message">python-bitcoin has examples for a few advanced transactions, but not one for payment channels unfortunately. Here is the protocol of payment channels in bitcoinJ:<br>
+<br>
+<a href="https://github.com/bitcoinj/bitcoinj/blob/master/core/src/main/java/org/bitcoinj/protocols/channels/Simple%20channels%20protocol.txt" target="_blank">https://github.com/bitcoinj/bitcoinj/blo...otocol.txt</a><br>
+<br>
+See also the early implementation of Lightning (pretty hard to follow though): <a href="https://github.com/ElementsProject/lightning" target="_blank">https://github.com/ElementsProject/lightning</a><br>
+<br>
+With payment channels it is possible to minimize risk of transactions. In a ColoredCoin &lt;&gt; BTC swap, instead of sending all the BTC at once and hoping for the ColoredCoin, one can swap in tiny increments (off-chain transactions). So a client could connect to a server, which connects another client. The server sends the first client the address of the second client. Now two clients can establish a payment channel between them and swap CC &lt;&gt; BTC. I think this is roughly what Lightning does for BTC transactions (+added complexity with time-locks). One might even imagine banks on their own payment network and different channels between inter-bank networks, "ColoredCoin fiat surrogates" and Bitcoin.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">10-31-2015, 09:48 AM</div>
+</div>
+<div class="message">Two links about trading<br>
+<br>
+<a href="https://www.chrisstucchio.com/blog/2012/hft_apology.html" target="_blank">https://www.chrisstucchio.com/blog/2012/...ology.html</a><br>
+<a href="http://www.kalzumeus.com/2015/10/30/developing-in-stockfighter-with-no-trading-experience/" target="_blank">http://www.kalzumeus.com/2015/10/30/deve...xperience/</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-01-2015, 08:30 AM</div>
+</div>
+<div class="message">I've created a tutorial for Bitcoin smart contracts here: <a href="https://github.com/benjyz/protomarket/tree/master/transaction_layer/examples/tutorial" target="_blank">https://github.com/benjyz/protomarket/tr...s/tutorial</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-01-2015, 09:06 AM</div>
+</div>
+<div class="message">Here is a description of Lightning does <a href="http://rusty.ozlabs.org/?p=450" target="_blank">http://rusty.ozlabs.org/?p=450</a><br>
+And a video: <a href="https://www.youtube.com/watch?v=8zVzw912wPo" target="_blank">https://www.youtube.com/watch?v=8zVzw912wPo</a><br>
+<br>
+This is really advanced but very interesting and promising in the context of the Lykke concept. The parallel is that intermediaries (in LT hubs) are trusted, but there would be a low trust backend. One could call this the trust-minimisation principle. Instead of fully trusting any financial institution, one trusts them partially under constrained conditions. There are many examples of exchanges as financial institutions failing: manipulation of markets (LIBOR), special order types to cater to HFT, running fractional reserve (commodities futures are not secured), selling data at high cost and so on.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-01-2015, 10:53 AM</div>
+</div>
+<div class="message"><blockquote><cite><span> (10-30-2015, 02:39 PM)</span>MichaelNikulin Wrote: <a href="https://forum.lykkex.com/post-47.html#pid47">[ -&gt; ]</a></cite>Is it correct that your proposal is to deploy an alt-chain for Lykke which is separate from Bitcoin blockshain?</blockquote>
+<br>
+To answer those questions better. I should mention I have followed many experiments with perhaps a&nbsp;hundred of proposals for P2P exchanges, also involving banks. The two most known are Mastercoin and Counterparty, but its quite clear that they don't really work and why. The nature of the relation between the Bitcoin community and banks, until recently, was more about banks shutting down Bitcoin related customer accounts. The turn around in sentiment in the last 6-12 months&nbsp;is very promising (the Economist has a title this week about "the trust machine").<br>
+<br>
+From my perspective the Lykke whitepaper introduced&nbsp;several&nbsp;new, important&nbsp;ideas:&nbsp;<br>
+<ul>
+<li>fiat money as coloredcoins on the blockchain (or rather bank balances, not money as fungible tokens). While there have been previous ideas around BitUSD (Bitshares), it makes only sense in the context of banks actually issuing some surrogate. For any fiat money&nbsp;to be transferred ultimately the central bank&nbsp;is involved. All previous concepts in this area did not take into account the banking relationship. They assumed that USD on the blockchain would somehow magically have its value. So Lykke described how this link could work in a way that makes sense.&nbsp;Actually I found out meanwhile that LHV in Estonia issued an experimental&nbsp;"Certificate of Deposit" or what they call Cuber - Cryptographic Universal Blockchain Entered Receivables&nbsp;[1] in the volume of 100,000€. But users of that crypto-security need an LHV account, so it does not work between banks.&nbsp;<br>
+</li>
+<li>a trust-minimized, but secured marketplace. If one looks at companies like Uber and AirBnb what they do is create a secure environment where trust can build and proper interfaces with the law can exist (although both of these important companies were threatened by legal authorities, but survived and now thrive). The governance of these marketplace is of a&nbsp;very complex nature, depending a lot on the goods also. A marketplace needs to define what goods can be traded, what people/institutions&nbsp;are on the system etc.<br>
+</li>
+<li>a transaction mechanism to swap Bitcoin and&nbsp;assets.<br>
+</li></ul>
+<br>
+My proposal had the goal to outline&nbsp;some of the tools&nbsp;necessary underlying such a marketplace and then&nbsp;to solve the suggested&nbsp;swap&nbsp;BTC &lt;&gt; ColoredCoin fiat surrogate&nbsp;and the issuance. One&nbsp;conclusion I draw from my investigation to make the swap work with the Bitcoin script&nbsp;is that, to make this work one would need some kind of security which itself can be circulated among banks, and that for the matching one needs to either define a recipient or a condition.&nbsp;So the topology I had in mind was a set of central exchange servers with minimized trust, much like hubs in the Lightning network. If LT could be build one could also add some ColoredCoin components and build a bridge to banks. The question is in such a system, how would counterparties assess the risk between them and move value around based on their risk and on liquidity.<br>
+<br>
+[1] <a href="https://www.lhv.ee/images/docs/Cuber_Conditions_of_Issue_of_Certificates_of_Deposit-EN.pdf" target="_blank">https://www.lhv.ee/images/docs/Cuber_Con...sit-EN.pdf</a></div>
+</div>
+<div class="multipage"><strong>Pages:</strong> <strong>1</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-2.html">2</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-3.html">3</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-4.html">4</a> </div></div>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+</div>
+<div id="footer">
+Powered By <a href="http://www.mybb.com/">MyBB</a>, © 2002-2020 <a href="http://www.mybb.com/">MyBB Group</a>
+</div>
+
+
+</body></html>

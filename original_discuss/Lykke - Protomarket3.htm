@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://forum.lykkex.com/archive/index.php?thread-20-3.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Lykke - Protomarket</title>
+
+<meta name="robots" content="index,follow">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket3_files/screen.css" media="screen">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket3_files/print.css" media="print">
+</head>
+<body>
+<div id="container">
+<h1><a href="https://forum.lykkex.com/index.php">Lykke</a></h1>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+<div id="fullversion"><strong>Full Version:</strong> <a href="https://forum.lykkex.com/thread-20-page-3.html">Protomarket</a></div>
+<div id="infobox">You're currently viewing a stripped down version of our content. <a href="https://forum.lykkex.com/thread-20-page-3.html">View the full version</a> with proper formatting.</div>
+<div id="content">
+<div class="multipage"><strong>Pages:</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-1.html">1</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-2.html">2</a> <strong>3</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-4.html">4</a> </div><div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-05-2015, 04:00 PM</div>
+</div>
+<div class="message">At least I've been able now to compile a transaction from scratch (it didn't evaluate to true yet).<br>
+<br>
+<br>
+<div class="codeblock">
+<div class="title">Code:<br>
+</div><div class="body" dir="ltr"><code>VerifyScript(txin.scriptSig, txin_scriptPubKey, newtx, 0, (SCRIPT_VERIFY_P2SH,))</code></div></div>
+<hr>
+....<br>
+<a href="https://bitcoin.org/en/glossary/pubkey-script" target="_blank">https://bitcoin.org/en/glossary/pubkey-script</a><br>
+<br>
+"A script included in outputs which sets the conditions that must be fulfilled for those satoshis to be spent. Data for fulfilling the conditions can be provided in a signature script. Called a scriptPubKey in code."<br>
+<br>
+Verification of a scriptPubKey looks like this:<br>
+<br>
+OP_DUP OP_HASH160 06f1b670791f9256bffc898f474271c22f4bb949 OP_EQUALVERIFY OP_CHECKS</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-05-2015, 05:20 PM</div>
+</div>
+<div class="message">detail protocol of standard channels<br>
+<br>
+<div class="codeblock">
+<div class="title">Code:<br>
+</div><div class="body" dir="ltr"><code>1) Client connects to server and asks for a public key.<br>
+2) Server provides a fresh key. Client creates TX1 which pays to a 2-of-2 multisig output. It creates an invalid<br>
+&nbsp; &nbsp;TX2 which spends TX1 and pays all money back to itself. The refund TX is time locked.<br>
+3) Client sends TX2 to server which verifies that it's valid and not connected to any transaction in its wallet.<br>
+&nbsp; &nbsp;Server signs TX2 and sends back the signature.<br>
+4) Client verifies that the server signed TX2 correctly and then sends TX1 to the server, which verifies that it<br>
+&nbsp; &nbsp;was the tx connected to the thing it just signed, and then broadcasts it thus locking in the money.<br>
+5) Each time the channel is adjusted, the client sends a new signed TX2 to the server which keeps it (does not need<br>
+&nbsp; &nbsp;to sign itself).</code></div></div>
+<hr></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-05-2015, 05:59 PM</div>
+</div>
+<div class="message">A <span style="font-weight: bold;">cash-asset swap channel</span> is then:<br>
+<br>
+1) Two peers find each other, A and B, that is they know their IP address (through a mutually trusted third party e.g.). They want to swap BTC &lt;&gt; ColoredCoin at a known ratio ("price"). &nbsp;A and B agree on the ColoredCoin protocol they use.<br>
+2) A opens a channel with B for the Bitcoin transfer. The above protocol applies where A is client and B is server.<br>
+3) B opens a channel with A for the ColoredCoin asset transfer. The above protocol applies where A is server and B is client (duplex channel).<br>
+4) A and B both increment the payment on both channels incrementally. E.g. if A pays B 1%*total amount, then B pays A 1%*total amount. The total amount refers to the total value in the respective currency or asset.<br>
+<br>
+The channels are uni-directional. A can only send BTC to B, and B only CC to A. The risk of this swap is zero, unlike a bank payment or asset transfer through a third party. It requires 1 on-chain transaction (broadcast of a pre-signed tx). It is not a full exchange protocol however, as discussed above, as it requires pre- matching and the establishment of the price. Also partial matching is not possible (that requires another duplex channel).<br>
+<br>
+This can be made such that either party can revoke the transaction in between, or the protocol could specify that if x% where exchanges thus far, the amount that has been exchange so far settles on-chain. I'm pretty sure both options are possible.<br>
+<br>
+While such a two-way channels is not trivial, its fairly well understood (although so far not used in practise).</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-05-2015, 06:33 PM</div>
+</div>
+<div class="message">""That means that large-B Bitcoin (the blockchain) will evolve into a high-value settlement system: as it grows it won't turn into a big moving van carrying many more pieces of paper (transactions per second); instead it will be an armoured car that can carry higher denominations (higher value per transaction). That means we will need other systems to do small-b bitcoin (the currency) retail payments."<br>
+<br>
+"And in the future we will have vulnerability-minimised ("trust-minimised" in the technical lingo) and thus global retail payment systems closely linked to the Bitcoin blockchain, such as the Lightning network."<br>
+<br>
+<a href="http://www.ibtimes.co.uk/nick-szabo-if-banks-want-benefits-blockchains-they-must-go-permissionless-1518874" target="_blank">http://www.ibtimes.co.uk/nick-szabo-if-b...ss-1518874</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">11-06-2015, 08:15 PM</div>
+</div>
+<div class="message"><blockquote><cite><span> (11-04-2015, 08:56 AM)</span>ben Wrote: <a href="https://forum.lykkex.com/post-63.html#pid63">[ -&gt; ]</a></cite>I think definitely such models are worth exploring. It would be good to start with the simplest example of a two-way CC channel for a fixed quantity, which is difficult enough to implement - the channel implementation is 1000's of lines of non-trivial code [1]. I think it is a strong tendency of the core Bitcoin developers to underestimate the work that is required to get familiar enough to use the mechanics. I've come the conclusion that a higher language to implement Bitcoin contracts would be very beneficial. python-bitcoin is great but still not high-level enough to make it easy.&nbsp;</blockquote>
+<br>
+Hi Ben,<br>
+Yes this is a&nbsp;good point&nbsp;to start with p2p duplex channel example without any additional&nbsp;hubs to provide trustless exchange of CCs first.&nbsp;<br>
+What I'm trying to&nbsp;get here&nbsp;is the longer term&nbsp;vision of&nbsp;how the CC exchange should work. There are still&nbsp;a lot of high level&nbsp;issues unclear for me in terms of how the network should be organized.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-08-2015, 05:04 PM</div>
+</div>
+<div class="message">Hi,<br>
+<br>
+I think there are many interesting questions and difficult challenges. Bitcoin is a global system and anyone with an Internet connection can interact. While the smart contract platform is very sophisticated and enables many new transaction types, its quite unclear how that integrates with existing institutions and markets. As far as I know all the Cryptoassets have very little circulation and use thus far.  While the listed assets here have circa 50M$ in marketcap the security and value behind them is questionable <a href="http://coinmarketcap.com/assets/" target="_blank">http://coinmarketcap.com/assets/</a> . One needs I think some trust, reputation and legal certainty behind the asset issuers. Stock-markets often have market-tiers with different regulatory requirements.<br>
+<br>
+Two more links:<br>
+Another interesting talk by an LT author which describes some of the thinking behind the channel/hub methods. I tried understanding all the details, but don't quite follow everything.<br>
+<a href="https://www.youtube.com/watch?v=-aI4inWxBwk" target="_blank">https://www.youtube.com/watch?v=-aI4inWxBwk</a><br>
+<br>
+The mentioned economist article:<br>
+<a href="http://www.economist.com/news/briefing/21677228-technology-behind-bitcoin-lets-people-who-do-not-know-or-trust-each-other-build-dependable" target="_blank">http://www.economist.com/news/briefing/2...dependable</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-09-2015, 11:06 AM</div>
+</div>
+<div class="message">Basically we have 2 related problems:<br>
+<br>
+1) how to implement a high-performance market system with minimising trust, while maintaining good governance<br>
+<br>
+2) how to scale blockchain systems<br>
+<br>
+LT tackles number 2) with hubs and channels. Markets require orders of magnitude higher throughput. Ripple e.g. implements consensus on orderbooks and even with low load takes up 1GB diskspace/day &nbsp;(versus 144MB/day for Bitcoin which has 4-5 magnitudes more of transactions). Also Ripple/Stellar is a credit-system and therefore has a fundamentally weaker security model.<br>
+<br>
+Sidechains and Liquid have implemented a system which assumes existing exchanges can be trusted to some degree.https://blockstream.com/2015/10/12/introducing-liquid/ &nbsp;I think Liquid is a fundamentally odd construct, because it assumes risk and liquidity can be transferred between exchanges at no cost. Its very unclear why all exchanges should have the same risk profile and value can move between them at par.<br>
+<br>
+I think the governance part is also tricky. While anonymous marketplaces on the Internet are often questionable, we know that a regular physical marketplace is also anonymous &nbsp;- somebody selling groceries in a town does not know the identity of the person giving him cash, nor does he usually need to. On the other hand a transaction where somebody sells a financial asset at scale is of a very different kind.<br>
+<br>
+In this context the recent comment of Christine Lagarde on Bitcoin is interesting:<br>
+<br>
+<br>
+<blockquote><cite>Quote:</cite>Many of you have heard about not only bitcoins but blockchains and that unbelievable technology that underlies the Bitcoins of this world at the moment, and how incredibly convenient it will be to actually generate trust and identify players and whatever pseudo they decide to use.<br>
+<br>
+And many of you in the industry are actually worried that those technologies are going to massively disrupt the current industry.<br>
+<br>
+Pause for a second.<br>
+<br>
+If those new technologies and as long as those new technologies are going to abuse, take advantage of, the yield for anonymity, I think the banking industry has quite a few good days ahead of it as long as it takes ownership of those issues of capital and culture in order to actually restore the trust without which you see no trade no transaction no business can take place.</blockquote>
+<br>
+<br>
+<a href="http://www.ft.com/intl/fastft/420521/post-420521" target="_blank">http://www.ft.com/intl/fastft/420521/post-420521</a><br>
+<a href="http://www.telegraph.co.uk/finance/currency/11978435/Bitcoin-battered-by-Jamie-Dimon-and-Chrisitine-Lagarde.html" target="_blank">http://www.telegraph.co.uk/finance/curre...garde.html</a><br>
+<br>
+This overlooks how impaired the existing financial fiat-institutions are, and that most people in the world don't have access to proper capital markets.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-10-2015, 07:31 PM</div>
+</div>
+<div class="message"><blockquote><cite>Quote:</cite><span style="color: #141414;"><span style="font-size: small;"><span style="font-family: Georgia, &#39;Times New Roman&#39;, Times, serif;">Actually there is a very good reason for Bitcoin-backed banks to exist, issuing their own digital cash currency, redeemable for bitcoins. Bitcoin itself cannot scale to have every single financial transaction in the world be broadcast to everyone and included in the block chain. There needs to be a secondary level of payment systems which is lighter weight and more efficient. Likewise, the time needed for Bitcoin transactions to finalize will be impractical for medium to large value purchases.</span></span></span><br>
+<br>
+<span style="color: #141414;"><span style="font-size: small;"><span style="font-family: Georgia, &#39;Times New Roman&#39;, Times, serif;">Bitcoin backed banks will solve these problems. They can work like banks did before nationalization of currency. Different banks can have different policies, some more aggressive, some more conservative. Some would be fractional reserve while others may be 100% Bitcoin backed. Interest rates may vary. Cash from some banks may trade at a discount to that from others.</span></span></span><br>
+<br>
+<span style="color: #141414;"><span style="font-size: small;"><span style="font-family: Georgia, &#39;Times New Roman&#39;, Times, serif;">George Selgin has worked out the theory of competitive free banking in detail, and he argues that such a system would be stable, inflation resistant and self-regulating.</span></span></span><br>
+<br>
+<span style="color: #141414;"><span style="font-size: small;"><span style="font-family: Georgia, &#39;Times New Roman&#39;, Times, serif;">I believe this will be the ultimate fate of Bitcoin, to be the "high-powered money" that serves as a reserve currency for banks that issue their own digital cash. Most Bitcoin transactions will occur between banks, to settle net transfers. Bitcoin transactions by private individuals will be as rare as... well, as Bitcoin based purchases are today.</span></span></span></blockquote>
+<br>
+quote from&nbsp;Hal Finney</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-5.html">bijak</a></h2></div><div class="dateline">11-18-2015, 04:05 AM</div>
+</div>
+<div class="message">I will write my views on various issues (specifically about putting efforts together and the lightning protocol) in multiple posts, this is the first part.<br>
+<br>
+There is an idea to put efforts together; following are my views for this:<br>
+<br>
+1- In order to put efforts together, we should enable parties to do so, some agreed upon principles are needed:<br>
+<br>
+a- I think currently we do not have a precise definition of where we want to go <img src="./Lykke - Protomarket3_files/huh.png" alt="Huh" title="Huh" class="smilie smilie_17"> , we have some ideas but not the precise one, for example if one looks to the <a href="http://www.netflixprize.com/" target="_blank"><span style="color: #33ffff;">Netflix prize</span></a> which was a successful effort to improve a matching algorithm, it had datasets and numeric goals available. For our current design I cannot see a dataset which explains for example which asset pairs do we have and the order dataset from customers. I feel we may get more view by looking at actual data set and things may differ if we have 3 pairs of assets or 1000 pairs and actual distribution of orders among pairs (By distribution I mean if EUR/USD share is 45% of total orders and EUR/JPY share is 3%, the transaction rate may different in some designs than in the case when all pairs are distributed evenly). Another thing which seems misinformation to me, is that it is stated <a href="https://wiki.lykkex.com/technicalrules" target="_blank"><span style="color: #33ffff;">here</span></a> we need to support 100,000 transactions per second but in my Skype call I heard 10,000 transactions per second. Now I think it as the difference of peak/normal load, but I am not sure.<br>
+<br>
+b- We need some agreed upon assumptions on how to progress: <br>
+For example, I can work on <a href="https://wiki.lykkex.com/competition/lykkedesign/bijak/poc" target="_blank"><span style="color: #33ffff;">my protocol</span></a> to improve the supported number of transactions by applying some of the ideas from lightning (the described protocol requires exchange in the middle as a required element as specified <a href="https://wiki.lykkex.com/colored_coin_exchange_software_architecture" target="_blank"><span style="color: #33ffff;">here</span></a> ) but now another idea <img src="./Lykke - Protomarket3_files/lightbulb.png" alt="Idea" title="Idea" class="smilie smilie_18"> comes to my mind after some brief studying on lightning network, the exchange operation (which is something different than matching) may be completed in exchange-less manner (by setting up two channels between clients requesting exchange), &nbsp;I’m not sure if we are in that stage to choose the direction. My protocol has exchange as the middleman as it was specified in the docs, previously.<br>
+<br>
+[The end of part 1, to be continued]</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">11-18-2015, 10:41 AM</div>
+</div>
+<div class="message"><blockquote><cite><span> (11-18-2015, 04:05 AM)</span>bijak Wrote: <a href="https://forum.lykkex.com/post-74.html#pid74">[ -&gt; ]</a></cite><span style="color: #3d3d3d;"><span style="font-size: small;"><span style="font-family: Verdana, Arial, sans-serif;">Another thing which seems misinformation to me, is that it is stated&nbsp;</span></span></span><a href="https://wiki.lykkex.com/technicalrules" target="_blank"><span style="color: #3d3d3d;"><span style="font-size: small;"><span style="font-family: Verdana, Arial, sans-serif;"><span style="color: #33ffff;">here</span></span></span></span></a><span style="color: #3d3d3d;"><span style="font-size: small;"><span style="font-family: Verdana, Arial, sans-serif;">&nbsp;we need to support 100,000 transactions per second but in my Skype call I heard 10,000 transactions per second. Now I think it as the difference of peak/normal load, but I am not sure.</span></span></span></blockquote>
+<br>
+Yes, sorry for the misinformation. It should be up to 100 000 transactions&nbsp;per second in peak load.</div>
+</div>
+<div class="multipage"><strong>Pages:</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-1.html">1</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-2.html">2</a> <strong>3</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-4.html">4</a> </div></div>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+</div>
+<div id="footer">
+Powered By <a href="http://www.mybb.com/">MyBB</a>, © 2002-2020 <a href="http://www.mybb.com/">MyBB Group</a>
+</div>
+
+
+</body></html>

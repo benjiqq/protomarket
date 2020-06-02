@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://forum.lykkex.com/archive/index.php?thread-20-2.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Lykke - Protomarket</title>
+
+<meta name="robots" content="index,follow">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket2_files/screen.css" media="screen">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket2_files/print.css" media="print">
+</head>
+<body>
+<div id="container">
+<h1><a href="https://forum.lykkex.com/index.php">Lykke</a></h1>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+<div id="fullversion"><strong>Full Version:</strong> <a href="https://forum.lykkex.com/thread-20-page-2.html">Protomarket</a></div>
+<div id="infobox">You're currently viewing a stripped down version of our content. <a href="https://forum.lykkex.com/thread-20-page-2.html">View the full version</a> with proper formatting.</div>
+<div id="content">
+<div class="multipage"><strong>Pages:</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-1.html">1</a> <strong>2</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-3.html">3</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-4.html">4</a> </div><div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-02-2015, 09:52 AM</div>
+</div>
+<div class="message">LETS and Ripple<br>
+<a href="http://thememorybank.co.uk/2014/11/17/varieties-of-community-currency/" target="_blank">http://thememorybank.co.uk/2014/11/17/va...-currency/</a><br>
+<a href="https://en.wikipedia.org/wiki/Local_exchange_trading_system" target="_blank">https://en.wikipedia.org/wiki/Local_exch...ing_system</a><br>
+<a href="http://archive.ripple-project.org/decentralizedcurrency.pdf" target="_blank">http://archive.ripple-project.org/decent...rrency.pdf</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">11-02-2015, 02:09 PM</div>
+</div>
+<div class="message">Lightning network looks really promising!<br>
+The thing is not clear for me regarding using Bitcoin blockchain is how the partial transaction with undefined price could be executed on the blockchain. I mean that there are at least three issues with implementing peer to peer assets exchange protocol based on blockchain script:<br>
+1. Unknown counterparty of the signed transaction. As you mentioned this could be solved having a network topology with centralized node (Lykke exchange). So in the lightning network each peer should setup the channel with Lykke exchange. BTW it would double the number of transactions.<br>
+2. Unknown price of transactions. When the limited order is used to sell/buy asset the minimal/maximal price is defined. The limited order could also trigger several transactions with different prices.<br>
+3. Unknown volume of transaction. There should be a way to execute transaction partially. It could be solved slicing transaction into a number of transactions with minimal lot size. But it also may increase the transaction number.<br>
+Do you have any ideas regarding these issues?</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-02-2015, 03:02 PM</div>
+</div>
+<div class="message">1. In Bitcoin counterparties know each other by their public key (in LT its more complicated because transactions get routed). This is the fundamental difference with exchanges: an exchange matches unknown participants to each other in a fair algorithm based on their preferences and judgements. The exchange knows the participants and "routes" transactions. What was described in the Lykke whitepaper is not possible with standard Bitcoin transactions, namely sending transactions without knowing the recipient. One can however define a transaction where the recipient is unknown with P2SH - any script that evaluates to true has access to the funds. In principle it might be possible to define conditions connected to a price, so that Bob can claim those funds, related to another address. Bob would be able to claim the funds if he has sent a coloredcoin to another address. Technically it could work by somehow connecting two outputs. So basically Alice would publish: "anyone who sends 1 BTC to this address and proves it to me, will receive 10 ColoredCoins". The problem is that she can't revoke that statement (i.e. cancel the "order"). Or if she can, it is unknown which message is valid depending on the arrival of that message at the recipient (blockchain solves the problem of ordering messages i.e. double spend problem). It's not quite clear to me how double spending relates to the deposit and withdrawal of ColoredCoins via a bank.<br>
+<br>
+2. I agree. In Bitcoin there is no notion of price at all. From the system perspective all that happens is transactions happening through time in cycles of blocks. What goes on inside a central exchange, as far as the Bitcoin blockchain is concerned, these are just donations.<br>
+<br>
+3. Channels allow to send and receive money off-chain in very tiny increments (description here [1]) . These are messages which never hit the blockchain, only at the beginning and the end. What happens is that two parties send signed transactions in increasing increments (via a multi-sig address and a timelock). This works only for pre-determined counterparties and pre-determined amounts. But a BTC &lt;&gt; CC swap could employ a channel if two parties want to exchange a known quantity. Perhaps there is some way to combine two channels. So two counterparties would have two channels open: one for BTC, and one for CC. then they do the swap incrementally in a pre-agreed ratio. This way the risk of losing funds is zero. Coding this in bitcoin core is not easy, so I want to create a layer where one create channels, multi-sig transactions, etc. The only available implementation of channels is in bitcoinJ.<br>
+<br>
+[1] <a href="https://en.bitcoin.it/wiki/Contract#Example_7:_Rapidly-adjusted_.28micro.29payments_to_a_pre-determined_party" target="_blank">https://en.bitcoin.it/wiki/Contract#Exam...ined_party</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">11-02-2015, 05:06 PM</div>
+</div>
+<div class="message">Regarding the 3rd issue lets see an example. <br>
+<br>
+Alice has 1 BTC and wants to buy 10 CC.<br>
+Alice has a channel with centralized echange - that means there is an multisigned address with 1 BTC on it.<br>
+Alice signs a transaction to spend 1 BTC if there is another transaction on 10 CC (or more than 10 CC) back to her address. Right?<br>
+<br>
+But lets assume that there is Bob who has only 2 CC and he wants to get 0.2 BTC for them. To match Bob with Alice there should be Alice's signed transaction for 0.2 BTC instead of 1 BTC... Or even better 2 signed transactions for 0.1 BTC. So I think that Alice should have to slice her 1 BTC to ten different transactions for 0.1 BTC (lets assume that 0.1 BTC is minimal lot size) and wait when someone whould match them.<br>
+<br>
+To provide these 10 different transactions for 0.1 BTC Alice should have 10 different multisigned addresses (our inputs) that she may spend independetly.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-02-2015, 06:15 PM</div>
+</div>
+<div class="message">Say there are 100 peers in a network, which are connected through an IRC channel (that's in Bitcoin how peers used to find each other before DNS seeding). The IRC channel is a bit like an exchange, but there is no orderbook, just a stream of messages. Peers can post messages in this channel and announce their intents, similar to open outcry. So Alice could put in there: "I'll sell 1 BTC for 10 CC, valid for 1 day". Anyone who is willing to swap 10 CC for 1 BTC could start a bidirectional channel with her and begin the swap. So Bob would send Alice 1% * 10CC and receive 1% * 1BTC, and then continue until 100% is reached. The risk of the transaction is only the initial 1%, i.e. effectively zero. The technical details involve locktime and SIGHASH flags. So this 1:1 matching is doable today with channels. The other protocol would be if these announcements (to everyone) could also be created in a binding way. I'm not entirely sure if its possible to define such an input condition. It probably requires an escrow. The channel method works for recipients which know each other.<br>
+<br>
+In terms of matching with several multi-sig addresses (0.1 to 10 addresses). Alice wouldn't know the public key of those 10 counterparties. The central exchange through matching has to determine the recipients. Alice could create a multisig transaction with the exchange. The problem is that the exchange in turn can't send the funds further to the other counterparties because it is dependent on Alice's signature.<br>
+<br>
+<a href="https://en.bitcoin.it/wiki/Contract" target="_blank">https://en.bitcoin.it/wiki/Contract</a> has a lot of details, but many of these ideas have never been implemented. One issue is that understanding and writing script is difficult. E.g. BitcoinJ has channels implemented but it's a lot of work to adapt them. The original announcement from 2013 here: <a href="https://bitcointalk.org/index.php?topic=244656.0" target="_blank">https://bitcointalk.org/index.php?topic=244656.0</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">11-03-2015, 03:27 AM</div>
+</div>
+<div class="message"><blockquote><cite><span> (11-02-2015, 06:15 PM)</span>ben Wrote: <a href="https://forum.lykkex.com/post-60.html#pid60">[ -&gt; ]</a></cite>Anyone who is willing to swap 10 CC for 1 BTC could start a bidirectional channel with her and begin the swap. So Bob would send Alice 1% * 10CC and receive 1% * 1BTC, and then continue until 100% is reached.&nbsp;</blockquote>
+It could take much time to open a new channel in terms of realtime trading. In my mind it would be&nbsp;preferable to have channels opened in advance before trading.<br>
+<br>
+It also requires Alice to open hundreds of channels to reach 100%&nbsp;if there are hundreds of&nbsp;Bobs holding less than&nbsp;1% of desired CC.&nbsp;<br>
+<br>
+<blockquote><cite><span> (11-02-2015, 06:15 PM)</span>ben Wrote: <a href="https://forum.lykkex.com/post-60.html#pid60">[ -&gt; ]</a></cite>In terms of matching with several multi-sig addresses (0.1 to 10 addresses). Alice wouldn't know the public key of those 10 counterparties. The central exchange through matching has to determine the recipients. Alice could create a multisig transaction with the exchange. The problem is that the exchange in turn can't send the funds further to the other counterparties because it is dependent on Alice's signature.</blockquote>
+<br>
+Yes, agree, the exchange can't send further Alice's assets - the exchange can send its own assets only. But it requires huge funds of assets to be accumulated by the exchange to provide such transfers.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-2.html">MichaelNikulin</a></h2></div><div class="dateline">11-03-2015, 01:25 PM</div>
+</div>
+<div class="message">There is an idea which I hope could work for us. The idea is we should have some sort of special nodes in the network. Lets call them Liquidity providers. They should provide transfers of an assets that they have taking some fees for that. <br>
+<br>
+Example: if Alice wants to trade CC issued by Bob she opens a channel with Bob who must be able to provide both transfer CC from Alice (assume that Bob has his own CC) and transfer CC to Alice form 3rd parties. <br>
+<br>
+These Liquidity providers should be registered and prove somehow that they do have some kind of CC.<br>
+Ben, what do you think of that?</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-04-2015, 08:56 AM</div>
+</div>
+<div class="message">I think definitely such models are worth exploring. It would be good to start with the simplest example of a two-way CC channel for a fixed quantity, which is difficult enough to implement - the channel implementation is 1000's of lines of non-trivial code [1]. I think it is a strong tendency of the core Bitcoin developers to underestimate the work that is required to get familiar enough to use the mechanics. I've come the conclusion that a higher language to implement Bitcoin contracts would be very beneficial. python-bitcoin is great but still not high-level enough to make it easy. <br>
+<br>
+In your described case hubs would require some capital to do matching. They will want some return on capital, adjusted for risk (I believe that applies to Lightning also where the question about incentives is unanswered). NuBits has an early implementation of delegated liquidity provision and liquidity pools, but the people doing this work don't have a legal status. Also the market makers don't make any profit, so there is no incentive really to provide that capital.<br>
+<br>
+For the longer term implications of some of these things Mike Hearn has some interesting thoughts, see his talks [2] and [3]. I think for integration with existing financial institutions (and the law effectively), it is a quite hard question to answer. As soon as one has AML/KYC many of the scaling effects are very different. As an example Stripe is a fastgrowing payments startup which has integrated ~10 countries to their credit-card frontend, but they have to work on a country by country basis. A combination of trustless systems and adding trust and reputation on top of the blockchain seems to me to be very promising.<br>
+<br>
+[1] <a href="https://github.com/bitcoinj/bitcoinj/tree/master/core/src/main/java/org/bitcoinj/protocols/channels" target="_blank">https://github.com/bitcoinj/bitcoinj/tre...s/channels</a><br>
+[2] <a href="https://www.youtube.com/watch?v=Pu4PAMFPo5Y" target="_blank">https://www.youtube.com/watch?v=Pu4PAMFPo5Y</a><br>
+[3] <a href="https://www.youtube.com/watch?v=mD4L7xDNCmA" target="_blank">https://www.youtube.com/watch?v=mD4L7xDNCmA</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-05-2015, 12:12 PM</div>
+</div>
+<div class="message">I got a stuck with doing a ColoredCoin transfer. Here some of the details. <br>
+<br>
+I wanted simply to find the outputs related to an address. bitcoind does not offer an API for this, because addresses are not associated with the wallet, so usually this is implemented in blockexplorers. Unfortunately there are also no open blockexplorers, as far as I know. Openassets queries openchain (by the same author as Openassets and Coinprism). Pybitcointools queries blockchain.info also, and python-bitcoin just had the transaction ID hardcoded. The problem is that bitcoind does not offer a lot of utilities via its API. <br>
+<br>
+<a href="https://github.com/bitpay/insight" target="_blank">https://github.com/bitpay/insight</a><br>
+<a href="https://github.com/bitcoin-abe/bitcoin-abe" target="_blank">https://github.com/bitcoin-abe/bitcoin-abe</a><br>
+<a href="https://github.com/openchain/openchain" target="_blank">https://github.com/openchain/openchain</a></div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-05-2015, 01:00 PM</div>
+</div>
+<div class="message"><span style="color: #000000;">I've created a brainwallet with the address "<span style="color: #000000;">15oq1ENPGCiFEaRKBTwthyoSzBqDCKNNRr". I managed to get the outputs via blockr. This is how the outputs look like for this address. It has not been used before and it has two inputs (two transactions I did in the amount of 0.0001). The output shows: the script is the same, and the transaction ids are different. What is called&nbsp;script here is basically the public key needed to unlock the funds.</span></span><br>
+<br>
+<br>
+<br>
+<div class="codeblock">
+<div class="title">Code:<br>
+</div><div class="body" dir="ltr"><code>a = "15oq1ENPGCiFEaRKBTwthyoSzBqDCKNNRr"<br>
+<br>
+<br>
+"""<br>
+{u'script': u'76a91434bbb5861132c2ca4334aeae51898a42a32020fc88ac', u'amount': u'0.00010000', u'confirmations': 471, u'tx': u'25cdf13e8a14001042e9c158d0788ada3f90354c5dbb5f44be474023a5aa7c8c', u'n': 1}<br>
+{u'script': u'76a91434bbb5861132c2ca4334aeae51898a42a32020fc88ac', u'amount': u'0.00010000', u'confirmations': 772, u'tx': u'36d4c55aa85aafe57be0f2706f68aafac082571a1ebccb3891e85c58178bc377', u'n': 0}<br>
+"""</code></div></div>
+</div>
+</div>
+<div class="multipage"><strong>Pages:</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-1.html">1</a> <strong>2</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-3.html">3</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-4.html">4</a> </div></div>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+</div>
+<div id="footer">
+Powered By <a href="http://www.mybb.com/">MyBB</a>, © 2002-2020 <a href="http://www.mybb.com/">MyBB Group</a>
+</div>
+
+
+</body></html>

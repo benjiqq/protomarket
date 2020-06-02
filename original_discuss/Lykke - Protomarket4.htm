@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://forum.lykkex.com/archive/index.php?thread-20-4.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Lykke - Protomarket</title>
+
+<meta name="robots" content="index,follow">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket4_files/screen.css" media="screen">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="./Lykke - Protomarket4_files/print.css" media="print">
+</head>
+<body>
+<div id="container">
+<h1><a href="https://forum.lykkex.com/index.php">Lykke</a></h1>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+<div id="fullversion"><strong>Full Version:</strong> <a href="https://forum.lykkex.com/thread-20-page-4.html">Protomarket</a></div>
+<div id="infobox">You're currently viewing a stripped down version of our content. <a href="https://forum.lykkex.com/thread-20-page-4.html">View the full version</a> with proper formatting.</div>
+<div id="content">
+<div class="multipage"><strong>Pages:</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-1.html">1</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-2.html">2</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-3.html">3</a> <strong>4</strong> </div><div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-5.html">bijak</a></h2></div><div class="dateline">11-19-2015, 05:38 AM</div>
+</div>
+<div class="message">[Part 2 followed from my previous post]<br>
+<br>
+2- Another point we should consider is that of <ul>
+<li>transaction count (that of 100,000)<br>
+</li>
+<li>transaction size (that of 1Mb block size limit)<br>
+</li></ul>
+The Bitcoin protocol allows to mix transactions in some scenarios in a single transaction, but this may increase the size of the resulting single transaction (although some overhead goes away) to be included in current Bitcoin 1 MB limit (For example consider compressing 100 transactions * 234 bytes to one transaction of size 60% * 100 *234 bytes, this should be investigated more). Although this is a reduction in size, going after designs which mix transactions (for example my consideration about distribution in part 1 [former post]), may be a part of solution, not all of it.<br>
+<br>
+3- Although the little amount, I think I know about the lightning protocol, seems to be workable with current Bitcoin blockchain, the reference implementation from <a href="https://github.com/ElementsProject/lightning" target="_blank"><span style="color: #33ffff;">here</span></a> says: “The protocol requires features not currently in Bitcoin, so by default it runs on top of the sidechain …..” <img src="./Lykke - Protomarket4_files/cry.png" alt="Cry" title="Cry" class="smilie smilie_21"> &nbsp;it is so important point, to study and decide on whether we are going to lose Bitcoin blockchain by using lightning or not.<br>
+<br>
+4- The problem has become a big one, which scatters our limited resources (focus and effort) among different areas, we may need to split it apart, if possible, and work on different parts step by step (we probably need something as roadmap, like <a href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Aroadmap" target="_blank"><span style="color: #33ffff;">here</span></a>). For example while improving working on blockchain problem and the transaction rate, other problems to be solved may be put down temporarily. <br>
+<br>
+<br>
+5- This current thread itself has become hard to follow and constantly switches (<a href="https://www.google.nl/search?q=mental+or+physical+labor" target="_blank"><span style="color: #33ffff;">my mind</span></a>) between various issues; Although considerable efforts has been put to create content, because of the format it may not be usable for new comers to the project, and at least significant parts of it may be lost if original authors left. So reordering the contents in a single followable path (like wiki posts each describing a single issue) may be helpful (to make efforts addable); Reporting the failure of understanding or similar is not a problem, this could be edited or explained later.<br>
+<br>
+[The end of part 2, to be continued]</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-5.html">bijak</a></h2></div><div class="dateline">11-20-2015, 12:30 PM</div>
+</div>
+<div class="message">[Part 3 followed from my previous post]<br>
+<br>
+<br>
+6- Here is the item in which I will further look at the the Bitcoin block size which I have described in <a href="https://wiki.lykkex.com/competition/lykkedesign/bijak/technicalrequirements" target="_blank"><span style="color: #33ffff;">my first submission</span></a> and the problem of concentration (the increase in block size may ease everything considerably).<br>
+<br>
+I will first write my thoughts about the issue of increasing block size on the network hash rate distribution (used for mining):<br>
+<br>
+a- Although probably everybody feels there is something wrong with concentration of power, I have found <a href="https://www.youtube.com/watch?v=R_T0WF-uCWg" target="_blank"><span style="color: #33ffff;">here</span></a> a very good short talk from <a href="https://en.wikipedia.org/wiki/Milton_Friedman" target="_blank"><span style="color: #33ffff;">Milton Friedman</span></a> about the subject and why it should be avoided. (Yes, he has many opponents but what I mean here is the opinions not the person)<br>
+<br>
+b- There is interesting point in Magna Carta story (Which I just know very little about, through following another text) of how a limited powerful few, controlled the problem of concentration of power; The story of Magna Carta "the greatest constitutional document of all times – the foundation of the freedom of the individual against the arbitrary authority of the despot" is available from <a href="https://en.wikipedia.org/wiki/Magna_Carta" target="_blank"><span style="color: #33ffff;">here</span></a>.<br>
+<br>
+c- <a href="https://www.youtube.com/watch?v=fCn8zs912OE" target="_blank"><span style="color: #33ffff;">Zipf distribution</span></a>; the natural tendency for phenomenas to gather around a few major centralized points.<br>
+<br>
+<br>
+d- Now, if we look of how currently Bitcoin hashing power is <a href="https://blockchain.info/pools" target="_blank"><span style="color: #33ffff;">distributed</span></a>, we see again, a few, have a major part of the hashing power, with the top 3 having more than 51% of power. (The pools have gained their power by joining the power of small nodes who agreed to bring the power to the pool, as far as I know).<br>
+<br>
+e- If we see the ordinary people spending in real life as <a href="https://en.wikipedia.org/wiki/Dollar_voting" target="_blank"><span style="color: #33ffff;">dollar voting</span></a>, we can also see the allocation of ordinary people hashing power to pools as a kind of voting.<br>
+<br>
+<br>
+f- Now with all those above, the problem of block size virtually seems to me (although this should be analyzed carefully with the study of mining algorithm and the way pools distribute the load among the ordinary hashing power providers; this study could be a part of roadmap) as the following: Consider for example today we instantly make possessing the dollar illegal, but we give dollar holders the option to replace their dollar (the currency in hands of people) for doLar (1 L instead of 2 l), and we will replace 1 doLar for each 20 dollar (in bitcoin terms we say to hashing power providers, you had a processing power by which you tested n * 1 Megabyte blocks in each minute, now you now can test a percentage &nbsp;of that for the same hashing power you had, and this is true for all hashing power providers) in such a manner that doLar-less people are negligible (I’m not such a cruel person for those possibly few, this is just an assumption, social security will be present), also the fractions of new doLar are not spendable anymore; In this scenario will US economy fall and anti-trust cases start to surface because some concentration of power has happened? The same question should apply to Bitcoin when hashing power is freely movable between pools.<br>
+<br>
+There is at least another problem while increasing the block size, it is about running Bitcoin full nodes:<br>
+<br>
+g- Some of the arguments against increasing block size listed <a href="https://en.bitcoin.it/wiki/Block_size_limit_controversy" target="_blank"><span style="color: #33ffff;">here</span></a> are about the hashing power owners who run their own full node. This should be investigated of how much of such pattern exists (This is somehow addressed in [d] above).<br>
+<br>
+It may also be interesting to know that, during development of my <a href="https://wiki.lykkex.com/competition/lykkedesign/bijak/poc" target="_blank"><span style="color: #33ffff;">POC</span></a>, while because of my bandwidth I could not run a node locally, I had access to a configuration to run a full node with sufficient bandwidth, this second attempt also failed because of insufficient storage amount for full blockchain which was about 50 GB at the time.<br>
+<br>
+h- The settlement network <a href="https://en.wikipedia.org/wiki/Ripple_%28payment_protocol%29" target="_blank"><span style="color: #33ffff;">Ripple</span></a> seem to be investigating the problem of trust by using what they call “attesters” and applying some kind of <a href="https://forum.ripple.com/viewtopic.php?f=1&amp;t=10354" target="_blank"><span style="color: #33ffff;">voting</span></a>; this seems similar to me as voting by hash power in Bitcoin network as I described above.<br>
+<br>
+Next part will hopefully be the last part.<br>
+<br>
+[The end of part 3, to be continued]</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-36.html">ben</a></h2></div><div class="dateline">11-20-2015, 01:07 PM</div>
+</div>
+<div class="message"><blockquote><cite><span> (11-19-2015, 05:38 AM)</span>bijak Wrote: <a href="https://forum.lykkex.com/post-76.html#pid76">[ -&gt; ]</a></cite>4- The problem has become a big one, which scatters our limited resources (focus and effort) among different areas, we may need to split it apart, if possible, and work on different parts step by step (we probably need something as roadmap, like <a href="https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Aroadmap" target="_blank"><span style="color: #33ffff;">here</span></a>). For example while improving working on blockchain problem and the transaction rate, other problems to be solved may be put down temporarily. <br>
+<br>
+5- This current thread itself has become hard to follow and constantly switches (<a href="https://www.google.nl/search?q=mental+or+physical+labor" target="_blank"><span style="color: #33ffff;">my mind</span></a>) between various issues;&nbsp;</blockquote>
+<br>
+4) I much&nbsp;agree. Especially there are limited resources for bitcoin related development. What is the simplest thing to do first? I think make it easy to create bitcoin transactions, then&nbsp;colored coin transactions. The OpenAssets implementation is great, but probably not flexible enough for our purposes. python-bitcoin is a good intermediate layer.<br>
+<br>
+5) Yes. It was more of a log of activity, then a structured discussion. We now also have the slack channel for realtime chat.</div>
+</div>
+<div class="post">
+<div class="header">
+<div class="author"><h2><a href="https://forum.lykkex.com/user-5.html">bijak</a></h2></div><div class="dateline">12-02-2015, 11:15 AM</div>
+</div>
+<div class="message">[Part 3 followed from my previous post]<br>
+<br>
+This the last part of the 4 parts.<br>
+<br>
+7- Since at least the major part of the system will heavily rely on the developed protocols, the correctness of the protocol should be somehow verified; for example one can check the article <a href="http://markus-jakobsson.com/papers/jakobsson-crypto99.pdf" target="_blank"><span style="color: #33ffff;">Abuse-free Optimistic Contract Signing</span></a> and see how some of the problems was discovered by <a href="http://www.cs.cornell.edu/~shmat/shmat_tcs.pdf" target="_blank"><span style="color: #33ffff;">Finite state analysis of two contract signing protocols</span></a> and a method for transferring the same high level protocol description to code <a href="http://sapic.gforge.inria.fr/" target="_blank"><span style="color: #33ffff;">here</span></a>. We may need to consider these while building the system.<br>
+<br>
+8- The tools and resources for blockchain development are as not mature as what is currently available for programming languages such as c#, so the development process and model may somehow be different, in various areas such as speed.<br>
+<br>
+9- There remain some considerations about legal issues and some ideas addressing the solutions for the block size problem that will be further investigated in its proper place.<br>
+<span style="font-size: small;"><span style="font-family: Calibri;"><br>
+[The end of part 4 of 4]</span></span></div>
+</div>
+<div class="multipage"><strong>Pages:</strong> <a href="https://forum.lykkex.com/archive/index.php?thread-20-1.html">1</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-2.html">2</a> <a href="https://forum.lykkex.com/archive/index.php?thread-20-3.html">3</a> <strong>4</strong> </div></div>
+<div class="navigation"><a href="https://forum.lykkex.com/archive/index.php">Lykke</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-6.html">Competitions</a> &gt; <a href="https://forum.lykkex.com/archive/index.php?forum-3.html">Lykke Design Competition</a> &gt; Protomarket</div>
+</div>
+<div id="footer">
+Powered By <a href="http://www.mybb.com/">MyBB</a>, © 2002-2020 <a href="http://www.mybb.com/">MyBB Group</a>
+</div>
+
+
+</body></html>
